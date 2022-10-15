@@ -1,0 +1,46 @@
+#include<stdio.h>    
+int find(int i,int j,int n)    
+{    
+    int leftmax=n,leftmin=1,rightmax=n,rightmin=1,counter=1,flag=1,a,x=1,y=1;  
+    for(a=1;a<=n*n;a++)  
+    {  
+        if(x==i&&y==j) break;  
+        if(flag==1&&x<leftmax&&y>=rightmin) x++;  
+        else if(flag==1&&x==leftmax&&y==rightmin)   
+           {  
+            rightmin++;  
+            flag=2;}  
+        if(flag==2&&x<=leftmax&&y<rightmax) y++;  
+        else if(flag==2&&x==leftmax&&y==rightmax)  
+            {  
+            leftmax--;  
+            flag=3;}  
+        if(flag==3&&x>leftmin&&y<=rightmax) x--;  
+        else if(flag==3&&x==leftmin&&y==rightmax)  
+            {  
+            rightmax--;  
+            flag=4;}  
+        if(flag==4&&x>=leftmin&&y>rightmin) y--;  
+        else if(flag==4&&x==leftmin&&y==rightmin)  
+            {  
+            leftmin++;  
+            x++;  
+            flag=1;}  
+        counter++;  
+    }    
+    return counter;  
+}    
+int main()    
+{    
+    int n,i,j;    
+    scanf("%d",&n);    
+    for(j=1;j<=n;j++)    
+    {    
+        for(i=1;i<=n;i++)    
+        {    
+            printf("%3d",find(i,j,n));    
+        }    
+        printf("\n");    
+    }    
+    return 0;    
+} 
